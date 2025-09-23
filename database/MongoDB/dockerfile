@@ -1,0 +1,7 @@
+FROM mongo:latest
+
+EXPOSE 27017/TCP
+
+# Run mongod as a daemon with fork and keep container running with sleep
+CMD mongod --bind_ip_all --fork --logpath /var/mongo/log/mongodb.log && \
+    /bin/sleep infinity

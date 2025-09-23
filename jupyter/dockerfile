@@ -1,0 +1,35 @@
+# Start from Jupyter's official datascience-notebook
+FROM jupyter/datascience-notebook:latest
+
+WORKDIR  /workspace
+COPY overrides.json /opt/conda/share/jupyter/lab/settings/
+
+USER root
+
+# -------------------------
+# Install Node.js + IJavascript kernel + TypeScript kernel (tslab)
+# -------------------------
+RUN apt-get update
+RUN apt-get install -y nodejs npm
+RUN npm install -g ijavascript
+RUN npm install -g yarn
+RUN npm install -g tslab typescript ts-node
+RUN tslab install
+
+# -------------------------
+# Install Ruby + IRuby kernel
+# -------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends ruby-full libzmq3-dev && \
+    gem install --no-document iruby && \
+    iruby register --force && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pip install jupyterthemes && jt -t monokai
+
+RUN apt-get install -y git
+
+# Expose default Jupyter port
+EXPOSE 8888
+
+# Start JupyterLab, set root directory to /
+CMD ["jupyter", "lab", "--allow-root", "--notebook-dir=/workspace"]

@@ -1,0 +1,19 @@
+FROM ollama/ollama
+
+RUN apt update && apt full-upgrade -y
+
+RUN apt install sudo -y && \
+	sudo apt install pipx -y && \
+	pipx install ollama --include-deps
+
+# Download models during build
+RUN ollama serve & sleep 5 && \
+    # ollama pull llama3.2 && \
+    # ollama pull qwen2.5:7b && \
+    # ollama pull gpt-oss:20b && \
+    # ollama pull mxbai-embed-large:latest && \
+    ollama pull nomic-embed-text:latest
+
+EXPOSE 11434
+
+ENTRYPOINT [ "ollama", "serve" ]

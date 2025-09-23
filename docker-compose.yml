@@ -1,0 +1,69 @@
+services:
+  mongodb:
+    build: 
+      context: ./database/MongoDB/
+      dockerfile: dockerfile
+    container_name: MongoDB
+    ports:
+      - 27018:27017
+    volumes:
+      - ./database/MongoDB/.database_data/data:/data/db
+      - ./database/MongoDB/.database_data/log:/var/mongo/log
+  postgresql:
+    build:
+      context: ./database/PostgreSQL/
+      dockerfile: dockerfile
+    container_name: PostgreSQL
+    ports:
+      - 5433:5432
+    volumes:
+      - ./database/PostgreSQL/.database_data/data:/var/lib/postgresql/data
+      - ./database/PostgreSQL/.database_data/log:/var/log/postgresql
+      - ./database/PostgreSQL/init.sql:/docker-entrypoint-initdb.d/init.sql
+  ollama:
+    build:
+      context: ./llm/
+      dockerfile: dockerfile
+    container_name: Ollama
+    ports:
+      - 11435:11434
+  everything:
+    build:
+      context: ./jupyter/
+      dockerfile: dockerfile
+    container_name: Jupyter
+    ports:
+      - 50110:8888
+    volumes:
+      - ./jupyter/workspace:/workspace
+      - ./jupyter/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
+  itp4865:
+    build:
+      context: ./4865/
+      dockerfile: dockerfile
+    container_name: itp4865
+    ports:
+      - 4865:8888
+    volumes:
+      - ./4865/workspace:/workspace
+      - ./4865/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
+  itp4864:
+    build:
+      context: ./4864/
+      dockerfile: dockerfile
+    container_name: itp4864
+    ports:
+      - 4864:8888
+    volumes:
+      - ./4864/workspace:/workspace
+      - ./4864/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
+  itp4471:
+    build:
+      context: ./4471/
+      dockerfile: dockerfile
+    container_name: itp4471
+    ports:
+      - 4471:8888
+    volumes:
+      - ./4471/workspace:/workspace
+      - ./4471/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
