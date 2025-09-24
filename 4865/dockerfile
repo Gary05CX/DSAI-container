@@ -4,7 +4,6 @@ FROM jupyter/base-notebook:latest
 WORKDIR  /workspace
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/
 COPY requirements.txt /requirements.txt
-COPY .env /workspace/.env
 
 USER root
 
