@@ -37,6 +37,16 @@ services:
     volumes:
       - ./jupyter/workspace:/workspace
       - ./jupyter/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
+  itp4864-rstudio:
+    build: 
+      context: ./4864/
+      dockerfile: rstudio.dockerfile
+    container_name: itp4864-rstudio
+    ports:
+      - "4684:8787"  
+    volumes:
+      - ./4864/workspace:/workspace
+    restart: unless-stopped
   itp4865:
     build:
       context: ./4865/
@@ -47,11 +57,11 @@ services:
     volumes:
       - ./4865/workspace:/workspace
       - ./4865/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
-  itp4864:
+  itp4864-jupyter:
     build:
       context: ./4864/
-      dockerfile: dockerfile
-    container_name: itp4864
+      dockerfile: jupyter.dockerfile
+    container_name: itp4864-jupyter
     ports:
       - 4864:8888
     volumes:
