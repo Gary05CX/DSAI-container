@@ -28,7 +28,7 @@ DSAI-container/
 ## Requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker Compose](https://docs.docker.co5678mpose/install/)
 
 ## Usage
 
@@ -57,7 +57,7 @@ docker compose up
   Username: `itp4864`  
   Password: `itp4864`
 
-- **VSCode** →  [`1210`](http://localhost:1210)  
+- **VSCode** →  [`5678`](http://localhost:5678)  
 
 - **MongoDB** → Exposed on port `27018`
 

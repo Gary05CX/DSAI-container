@@ -1,3 +1,4 @@
 {
-    "workbench.colorTheme": "Visual Studio Dark"
+    "workbench.colorTheme": "Visual Studio Dark",
+    "terminal.integrated.cwd": "/home/coder/project"
 }

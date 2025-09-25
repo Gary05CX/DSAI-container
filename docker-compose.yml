@@ -81,7 +81,7 @@ services:
     build: ./vscode
     container_name: VSCode
     ports:
-      - "1210:8080"
+      - "5678:8080"
     volumes:
       - ./vscode/workspace:/home/coder/project
     working_dir: /home/coder/project   
