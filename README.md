@@ -7,19 +7,23 @@ Additionally, a shared Jupyter container can be used for general purposes.
 ## Project Structure
 
 ```
-.
-├── 4471/                 # Course-specific container
-├── 4864/                 # Course-specific container
-├── 4865/                 # Course-specific container
-├── database/
-│   ├── MongoDB/          # MongoDB container
-│   └── PostgreSQL/       # PostgreSQL container
-├── jupyter/              # General-purpose Jupyter container
-├── llm/                  # LLM container
-├── rstudio/              # RStudio container
-├── docker-compose.yml    # Compose file to orchestrate everything
-└── README.md
-```
+DSAI-container/
+├── database/              # Databases
+│   ├── MongoDB/           # MongoDB container
+│   └── PostgreSQL/        # PostgreSQL container (with init.sql)
+├── jupyter/               # JupyterLab container
+│   ├── dockerfile
+│   ├── overrides.json
+│   └── workspace/
+├── rstudio/               # RStudio container
+│   └── dockerfile
+├── vscode/                # VSCode (code-server) container
+│   ├── dockerfile
+│   ├── workspace/
+│   └── init/              # Preloaded extensions & settings
+└── docker-compose.yml     # Main compose file
+
+````
 
 ## Requirements
 
@@ -53,6 +57,8 @@ docker compose up
   Username: `itp4864`  
   Password: `itp4864`
 
+- **VSCode** →  [`1210`](http://localhost:1210)  
+
 - **MongoDB** → Exposed on port `27018`
 
 - **PostgreSQL** → Exposed on port `5433`
@@ -71,5 +77,23 @@ Press `CTRL+C` (or `^+C` in MacOS) in terminal
 - Databases (MongoDB/Postgres) can be mapped to volumes if persistence is required.
 - By default, containers reset when rebuilt.
 
+### 6. VSCode Environment
 
+The VSCode container (`code-server`) comes pre-installed with:
 
+* **Languages / Runtimes**:
+
+  * Node.js + Yarn
+  * Python
+  * Go
+  * Rust
+  * Java (OpenJDK)
+  * C / C++ (via gcc, g++)
+  * Git (with GitHub/GitLab support)
+
+* **Extensions** (defined in `vscode/init/extensions.txt`)
+
+* **Settings & Theme** (from `vscode/init/settings.json`)
+
+You can modify `vscode/init/` to customize your environment.
+On build, extensions will be auto-installed and settings applied.
