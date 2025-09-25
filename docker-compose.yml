@@ -77,3 +77,15 @@ services:
     volumes:
       - ./4471/workspace:/workspace
       - ./4471/overrides.json:/opt/conda/share/jupyter/lab/settings/overrides.json
+  vscode:
+    build: ./vscode
+    container_name: VSCode
+    ports:
+      - "1210:8080"
+    volumes:
+      - ./vscode/workspace:/home/coder/project
+    working_dir: /home/coder/project   
+    command: code-server --bind-addr 0.0.0.0:8080 --auth none   
+    environment:
+      - EXTENSIONS_GALLERY={"serviceUrl":"https://marketplace.visualstudio.com/_apis/public/gallery","itemUrl":"https://marketplace.visualstudio.com/items"}
+
