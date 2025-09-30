@@ -4,11 +4,7 @@ FROM ollama/ollama
 
 COPY ./Code /Code
 
-RUN apt update && apt full-upgrade -y
-
-RUN apt install sudo -y && \
-	sudo apt install pipx -y && \
-	pipx install ollama --include-deps
+RUN apt-get update 
 
 # Download models during build
 RUN ollama serve & sleep 5 && \
@@ -18,5 +14,3 @@ RUN ollama serve & sleep 5 && \
     ollama pull nomic-embed-text:latest
 
 EXPOSE 11434
-
-ENTRYPOINT [ "ollama", "serve" ]
