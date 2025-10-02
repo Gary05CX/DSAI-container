@@ -8,13 +8,13 @@ RUN apt-get update --allow-releaseinfo-change && \
     rm -rf /var/lib/apt/lists/*
 
 # Create admin user with password 'itp4864'; grant passwordless sudo (for testing convenience)
-RUN useradd -m -s /bin/bash itp4864 && \
-    echo "itp4864:itp4864" | chpasswd && \
-    adduser itp4864 sudo
+RUN useradd -m -s /bin/bash admin && \
+    echo "admin:admin" | chpasswd && \
+    adduser admin sudo
 
 # Working directory (as per your request: /workspace)
 WORKDIR /workspace
-RUN mkdir -p /workspace && chown itp4864:itp4864 /workspace
+RUN mkdir -p /workspace && chown admin:admin /workspace
 
 # Pre-install ggplot2 (will be installed to system library)
 RUN R -e "install.packages('ggplot2', repos='https://cloud.r-project.org')"
