@@ -20,7 +20,7 @@ services:
       - ./database/PostgreSQL/.database_data/data:/var/lib/postgresql/data
       - ./database/PostgreSQL/.database_data/log:/var/log/postgresql
       - ./database/PostgreSQL/init.sql:/docker-entrypoint-initdb.d/init.sql
-  everything:
+  jupyter:
     build:
       context: ./jupyter/
       dockerfile: dockerfile
