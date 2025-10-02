@@ -16,10 +16,6 @@ services:
     container_name: PostgreSQL
     ports:
       - 5433:5432
-    volumes:
-      - ./database/PostgreSQL/.database_data/data:/var/lib/postgresql/data
-      - ./database/PostgreSQL/.database_data/log:/var/log/postgresql
-      - ./database/PostgreSQL/init.sql:/docker-entrypoint-initdb.d/init.sql
   jupyter:
     build:
       context: ./jupyter/
